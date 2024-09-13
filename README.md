@@ -56,7 +56,14 @@ git clone https://github.com/kubernetes/autoscaler.git
 Once cloned, move to this repository and overwrite the *autoscaler* directory. Then navigate to autoscaler/vertical-pod-autoscaler for installation instructions. [shortcut](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#install-command)
 
 # How vpa works 
-[vpa](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler)
+Link to [vpa](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) repo
+
+![vpa](img/vpa-allocate-resources.png)
+
+Components:
+- VPA Recommender - monitors metrics to generate recommendations
+- VPA Updater - evicts pods
+- VPA Admission Controller - will intercept deployment to mutate resource requests and/or limits
 
 Modes:
 - Auto - similar to Recreate; continued testing with in-place (no restart) needs to happen as currently pod is still evicted. [issue](https://github.com/kubernetes/autoscaler/issues/5885)
@@ -90,12 +97,10 @@ kubectl apply -f vpa.yaml
 ```
 Now watch as vpa will get recommendations, use the updater to evict the pods and admission controler to alter the resource requests.
 
-![vpa](img/vpa-allocate-resources.png)
-
 # How to limit blast radius
 Pod Disruption Budget - PDB see [pdb.yaml](./pdb.yaml)
-Limits
-- set max/min
+Limits in vpa:
+- set maxAllowed/minAllowed
 - set controlled resources
 - set controlled values
 - set container
@@ -103,9 +108,9 @@ Limits
 
 ## Individual Container
 
-[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml)
-
-For container control, you specify a single contaier to either:
+>Note
+>[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml)
+>For container control, you specify a single contaier to either:
 - turn off vpa; must state ``"off"``
 - auto vpa; ``"auto"``
 
