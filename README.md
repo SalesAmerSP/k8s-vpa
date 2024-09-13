@@ -7,6 +7,10 @@ Deploy:
 
 Install metrics (required) and dashboard (optional)
 
+## Metrics
+[Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
+
+## Dashboard
 ```
 # Add kubernetes-dashboard repository
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
