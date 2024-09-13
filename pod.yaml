@@ -1,0 +1,17 @@
+apiVersion: v1 
+kind: Pod 
+metadata:
+  name: ngin
+spec:
+  containers:
+  - name: ngin
+    image: nginx:1.27.1
+    ports:
+    - containerPort: 80
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+      requests:
+        memory: "16Mi"
+        cpu: "50m"
