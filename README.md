@@ -98,12 +98,12 @@ kubectl apply -f vpa.yaml
 Now watch as vpa will get recommendations, use the updater to evict the pods and admission controler to alter the resource requests.
 
 # How to limit blast radius
-Pod Disruption Budget - PDB see [pdb.yaml](./pdb.yaml)
+Pod Disruption Budget - [PDB](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) see [pdb.yaml](./pdb.yaml)
 Limits in vpa:
 - set maxAllowed/minAllowed
 - set controlled resources
 - set controlled values
-- set container
+- set container specific controls
 
 
 ## Individual Container
