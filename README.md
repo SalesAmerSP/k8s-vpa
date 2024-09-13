@@ -111,6 +111,7 @@ Now watch as vpa will get recommendations, use the updater to evict the pods and
 
 # How to limit blast radius
 Pod Disruption Budget - [PDB](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) see [pdb.yaml](./pdb.yaml)
+
 Limits in vpa:
 - set maxAllowed/minAllowed
 - set controlled resources
