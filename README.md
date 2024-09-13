@@ -88,7 +88,7 @@ Modes:
 
 Check recommendations:
 ```
-kubectl describe vpa
+kubectl describe vpa k8s-vpa
 ```
 Recommendations:
 
