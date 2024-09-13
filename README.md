@@ -109,8 +109,9 @@ Limits in vpa:
 ## Individual Container
 
 >Note
->[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml)
->For container control, you specify a single contaier to either:
+>[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml) spec for container specific controls
+
+For container control, you specify a single contaier to either:
 - turn off vpa; must state ``"off"``
 - auto vpa; ``"auto"``
 
