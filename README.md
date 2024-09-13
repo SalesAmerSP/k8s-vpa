@@ -1,6 +1,10 @@
-# Kind with Metrics
+# KIND with Metrics
 >[!Note]
 >Increase Podman Desktop ram to 4G
+
+```
+brew install kind
+```
 
 Deploy:
 `kind create cluster --config kind-mk-config.yaml --name kind-metrics`
@@ -9,6 +13,10 @@ Install metrics (required) and dashboard (optional)
 
 ## Metrics
 [Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
+
+```
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
 
 ## Dashboard
 ```
