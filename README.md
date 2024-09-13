@@ -108,7 +108,7 @@ Limits in vpa:
 
 ## Individual Container
 
->Note
+>[!Note]
 >[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml) spec for container specific controls
 
 For container control, you specify a single contaier to either:
@@ -117,5 +117,6 @@ For container control, you specify a single contaier to either:
 
 ## Other testing
 
-Enable feature gate "InPlacePodVerticalScaling", this is outside of VPA
+Enable feature gate "InPlacePodVerticalScaling", this is outside of VPA based on the issue above. Needs testig in future.
+
 See also resize cpu and memory [here](kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/)
