@@ -88,7 +88,9 @@ Update the ``vpa.yaml`` line 21, to ``"Auto"`` and redeploy
 ```
 kubectl apply -f vpa.yaml
 ```
-Now watch as vpa will get recommendations, use the updated to evict the pods and admission controler to alter the resource requests.
+Now watch as vpa will get recommendations, use the updater to evict the pods and admission controler to alter the resource requests.
+
+![vpa](img/vpa-allocate-resources.png)
 
 # How to limit blast radius
 Pod Disruption Budget - PDB see [pdb.yaml](./pdb.yaml)
