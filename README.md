@@ -1,12 +1,24 @@
-# Kind with Metrics
-Note
-Increase Podman Desktop ram to 4G
+# KIND with Metrics
+>[!Note]
+>Increase Podman Desktop ram to 4G
+
+```
+brew install kind
+```
 
 Deploy:
 `kind create cluster --config kind-mk-config.yaml --name kind-metrics`
 
 Install metrics (required) and dashboard (optional)
 
+## Metrics
+[Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
+
+```
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+## Dashboard
 ```
 # Add kubernetes-dashboard repository
 helm repo add kubernetes-dashboard https://kubernetes.github.io/dashboard/
@@ -56,7 +68,14 @@ git clone https://github.com/kubernetes/autoscaler.git
 Once cloned, move to this repository and overwrite the *autoscaler* directory. Then navigate to autoscaler/vertical-pod-autoscaler for installation instructions. [shortcut](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler#install-command)
 
 # How vpa works 
-[vpa](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler)
+Link to [vpa](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) repo
+
+![vpa](img/vpa-allocate-resources.png)
+
+Components:
+- VPA Recommender - monitors metrics to generate recommendations
+- VPA Updater - evicts pods
+- VPA Admission Controller - will intercept deployment to mutate resource requests and/or limits
 
 Modes:
 - Auto - similar to Recreate; continued testing with in-place (no restart) needs to happen as currently pod is still evicted. [issue](https://github.com/kubernetes/autoscaler/issues/5885)
@@ -88,20 +107,21 @@ Update the ``vpa.yaml`` line 21, to ``"Auto"`` and redeploy
 ```
 kubectl apply -f vpa.yaml
 ```
-Now watch as vpa will get recommendations, use the updated to evict the pods and admission controler to alter the resource requests.
+Now watch as vpa will get recommendations, use the updater to evict the pods and admission controler to alter the resource requests.
 
 # How to limit blast radius
-Pod Disruption Budget - PDB see [pdb.yaml](./pdb.yaml)
-Limits
-- set max/min
+Pod Disruption Budget - [PDB](https://kubernetes.io/docs/concepts/workloads/pods/disruptions/) see [pdb.yaml](./pdb.yaml)
+Limits in vpa:
+- set maxAllowed/minAllowed
 - set controlled resources
 - set controlled values
-- set container
+- set container specific controls
 
 
 ## Individual Container
 
-[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml)
+>[!Note]
+>[CRD](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/deploy/vpa-v1-crd.yaml) spec for container specific controls
 
 For container control, you specify a single contaier to either:
 - turn off vpa; must state ``"off"``
@@ -109,5 +129,6 @@ For container control, you specify a single contaier to either:
 
 ## Other testing
 
-Enable feature gate "InPlacePodVerticalScaling", this is outside of VPA
+Enable feature gate "InPlacePodVerticalScaling", this is outside of VPA based on the issue above. Needs testig in future.
+
 See also resize cpu and memory [here](kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources/)
