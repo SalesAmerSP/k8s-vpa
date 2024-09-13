@@ -1,6 +1,6 @@
 # Kind with Metrics
-Note
-Increase Podman Desktop ram to 4G
+>[!Note]
+>Increase Podman Desktop ram to 4G
 
 Deploy:
 `kind create cluster --config kind-mk-config.yaml --name kind-metrics`
