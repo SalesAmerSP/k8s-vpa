@@ -70,10 +70,12 @@ Once cloned, move to this repository and overwrite the *autoscaler* directory. T
 # How vpa works 
 Link to [vpa](https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler) repo
 
+Another good [article](https://povilasv.me/vertical-pod-autoscaling-the-definitive-guide/)
+
 ![vpa](img/vpa-allocate-resources.png)
 
 Components:
-- VPA Recommender - monitors metrics to generate recommendations
+- VPA Recommender - monitors metrics to generate recommendations (default 1m) [modify](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/FAQ.md) recommender-interval with arg
 - VPA Updater - evicts pods
 - VPA Admission Controller - will intercept deployment to mutate resource requests and/or limits
 
@@ -115,8 +117,13 @@ Pod Disruption Budget - [PDB](https://kubernetes.io/docs/concepts/workloads/pods
 Limits in vpa:
 - set maxAllowed/minAllowed
 - set controlled resources
+  - cpu
+  - memory
 - set controlled values
+  - RequestsandLimits
+  - RequestesOnly
 - set container specific controls
+- specify or exclude namespaces [args](https://github.com/kubernetes/autoscaler/blob/master/vertical-pod-autoscaler/FAQ.md) to recommender 
 
 
 ## Individual Container
